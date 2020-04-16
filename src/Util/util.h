@@ -25,7 +25,9 @@
 #ifndef UTIL_UTIL_H_
 #define UTIL_UTIL_H_
 
+#include <ctime>
 #if defined(_WIN32)
+#define FD_SETSIZE 1024 //修改默认64为1024路
 #include <WinSock2.h>
 #pragma comment (lib,"WS2_32")
 #else
@@ -173,7 +175,7 @@ std::string strToLower(std::string &&str);
 std::string &strToUpper(std::string &str);
 std::string strToUpper(std::string &&str);
 void replace(string &str, const string &old_str, const string &new_str) ;
-
+bool isIP(const char *str);
 
 #ifndef bzero
 #define bzero(ptr,size)  memset((ptr),0,(size));
@@ -212,6 +214,13 @@ uint64_t getCurrentMillisecond();
  * @return
  */
 uint64_t getCurrentMicrosecond();
+
+/**
+ * 获取时间字符串
+ * @param fmt 时间格式，譬如%Y-%m-%d %H:%M:%S
+ * @return 时间字符串
+ */
+string getTimeStr(const char *fmt,time_t time = 0);
 
 }  // namespace toolkit
 
